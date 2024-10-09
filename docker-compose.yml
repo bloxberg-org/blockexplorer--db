@@ -1,0 +1,13 @@
+version: "3.3"
+
+services:
+  db:
+    restart: unless-stopped
+    container_name: "postgres_new"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./blockscout-db-data:/var/lib/postgresql/data
+    ports:
+      - 7432:5432

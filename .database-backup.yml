@@ -1,0 +1,14 @@
+include: '.autodevops-template.yml'
+
+.auto-deploy:
+  image: "registry.gitlab.com/gitlab-org/cluster-integration/auto-deploy-image:latest"
+
+6. backup: 
+  extends: .auto-deploy
+  stage: qa
+  tags:
+    - $QA_TAG
+  script: 
+    - ./backup.sh
+  rules: 
+    - if: $CI_PIPELINE_SOURCE == "schedule"
